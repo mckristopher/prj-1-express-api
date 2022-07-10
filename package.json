@@ -3,10 +3,15 @@
   "version": "1.0.0",
   "description": "image processing app",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "build": "npx tsc",
+    "start": "node src/index.ts",
+    "dev": "nodemon src/index.ts"
+  },
   "author": "Mercy Christopher",
   "license": "ISC",
   "devDependencies": {
+    "@types/express": "^4.17.13",
     "@types/jasmine": "^4.0.3",
     "@types/node": "^18.0.3",
     "eslint": "^8.19.0",
