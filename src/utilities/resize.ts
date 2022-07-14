@@ -12,7 +12,7 @@ async function createResizedFile(
   height: number,
   next: NextFunction,
   fileType: FileType | null = 'jpeg'
-) {
+): Promise<void> {
   if (
     !existsSync(
       `${APP_DIR}/assets/lib/${fileName}-${width}-${height}.${fileType}`
@@ -44,7 +44,7 @@ async function createResizedFile(
   }
 }
 
-function fileExists(fileName: string) {
+function fileExists(fileName: string): boolean {
   return existsSync(`${APP_DIR}/assets/${fileName}.jpeg`);
 }
 
