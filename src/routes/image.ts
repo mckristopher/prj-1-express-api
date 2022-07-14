@@ -1,5 +1,5 @@
 import express from 'express';
-import rs from '../utilities/resize';
+import rs, { FileType } from '../utilities/resize';
 
 const router = express.Router();
 
@@ -29,7 +29,8 @@ router.get(
         req.query.fileName as string,
         parseInt(req.query.width as string) as number,
         parseInt(req.query.height as string) as number,
-        next
+        next,
+        req.query.fileType as string as FileType
       );
     } catch (err) {
       next(err);
@@ -40,7 +41,7 @@ router.get(
     res.sendFile(
       `${process.cwd()}/assets/lib/${req.query.fileName}-${req.query.width}-${
         req.query.height
-      }.jpeg`
+      }.${req.query.fileType || 'jpeg'}`
     );
   }
 );

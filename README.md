@@ -14,6 +14,9 @@ More images can be added to `/assets` folder to use from the api
 
 All generated images are in the `/assets/lib` folder
 
+Image can also be viewed in `png` format by including `fileType=png` param
+Example : `http://localhost:3000/api/images?fileName=encenadaport&width=100&height=200&fileType=png`
+
 ## Other scripts
 
 - `npm run test` to run unit tests
