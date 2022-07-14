@@ -19,13 +19,13 @@ describe('/api/image endpoint', () => {
       '/api/images?fileName=encenadaport&width=100&height=100'
     );
     expect(response.status).toBe(200);
-    expect(fs.existsSync(getFilePath('encenadaport', 100, 100)));
+    expect(fs.existsSync(getFilePath('encenadaport', 100, 100))).toBe(true);
 
     const secondResponse = await request.get(
       '/api/images?fileName=fjord&width=500&height=500'
     );
     expect(secondResponse.status).toBe(200);
-    expect(fs.existsSync(getFilePath('fjord', 500, 500)));
+    expect(fs.existsSync(getFilePath('fjord', 500, 500))).toBe(true);
   });
 
   it('should return appropriate image type if fileType is set', async () => {
@@ -66,12 +66,48 @@ describe('/api/image error handling', async () => {
     expect(response.status).toBe(400);
     expect(response.text).toBe('Some input value(s) are missing : height');
   });
+});
 
+describe('/api/image incorrect value handling', async () => {
   it('should throw an error if file with requested name does not exist', async () => {
     const response = await request.get(
       '/api/images?fileName=anyfilet&width=100&height=100'
     );
     expect(response.status).toBe(400);
-    expect(response.text).toBe('File Not Found');
+    expect(response.text).toBe('Invalid File Name Specified');
+
+    const secondResponse = await request.get(
+      '/api/images?fileName=file123&width=100&height=100'
+    );
+    expect(secondResponse.status).toBe(400);
+    expect(secondResponse.text).toBe('Invalid File Name Specified');
+  });
+
+  it('should throw an error if width is incorrect / unsupported in query', async () => {
+    const response = await request.get(
+      '/api/images?fileName=encenadaport&width=qwe&height=100'
+    );
+    expect(response.status).toBe(400);
+    expect(response.text).toBe('Invalid Width Specified');
+
+    const secondResponse = await request.get(
+      '/api/images?fileName=encenadaport&width=10a&height=100'
+    );
+    expect(secondResponse.status).toBe(400);
+    expect(secondResponse.text).toBe('Invalid Width Specified');
+  });
+
+  it('should throw an error if height is incorrect / unsupported in query', async () => {
+    const response = await request.get(
+      '/api/images?fileName=encenadaport&width=100&height=abc'
+    );
+    expect(response.status).toBe(400);
+    expect(response.text).toBe('Invalid Height Specified');
+
+    const secondResponse = await request.get(
+      '/api/images?fileName=encenadaport&width=10&height=100px'
+    );
+    expect(secondResponse.status).toBe(400);
+    expect(secondResponse.text).toBe('Invalid Height Specified');
   });
 });

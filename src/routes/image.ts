@@ -21,7 +21,24 @@ router.get(
         throw new Error(error);
       }
       if (!rs.fileExists(req.query.fileName as string)) {
-        const error = 'File Not Found';
+        const error = 'Invalid File Name Specified';
+        res.status(400).send(error);
+        throw new Error(error);
+      }
+      console.log(isNaN(parseInt(req.query.width as string)));
+      if (
+        isNaN(req.query.width as unknown as number) ||
+        isNaN(parseInt(req.query.width as string))
+      ) {
+        const error = 'Invalid Width Specified';
+        res.status(400).send(error);
+        throw new Error(error);
+      }
+      if (
+        isNaN(req.query.height as unknown as number) ||
+        isNaN(parseInt(req.query.height as string))
+      ) {
+        const error = 'Invalid Height Specified';
         res.status(400).send(error);
         throw new Error(error);
       }
