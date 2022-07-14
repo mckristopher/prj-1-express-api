@@ -30,4 +30,8 @@ async function createResizedFile(
   }
 }
 
-export default createResizedFile;
+function fileExists(fileName: string) {
+  return existsSync(`${APP_DIR}/assets/${fileName}.jpeg`);
+}
+
+export default { createResizedFile, fileExists };

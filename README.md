@@ -9,7 +9,7 @@ To get the Node server running locally:
 Open `http://localhost:3000/api/images?fileName=encenadaport&width=100&height=200`
 
 in the browser / call from postman to view the image; change the query params as necessary
-Refreshing the pageany number of times will return the pregenerated image
+Refreshing the page any number of times will return the pregenerated image
 More images can be added to `/assets` folder to use from the api
 
 All generated images are in the `/assets/lib` folder

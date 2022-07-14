@@ -57,6 +57,14 @@ describe('/api/image endpoint', () => {
     expect(response.text).toBe('Some input value(s) are missing : height');
   });
 
+  it('should throw an error if file with requested name does not exist', async () => {
+    const response = await request.get(
+      '/api/images?fileName=anyfilet&width=100&height=100'
+    );
+    expect(response.status).toBe(400);
+    expect(response.text).toBe('File Not Found');
+  });
+
   afterAll(() => {
     fs.unlinkSync(getFilePath('encenadaport', 200, 200));
     fs.unlinkSync(getFilePath('encenadaport', 100, 100));

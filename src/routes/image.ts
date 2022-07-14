@@ -1,5 +1,5 @@
 import express from 'express';
-import createResizedFile from '../utilities/resize';
+import rs from '../utilities/resize';
 
 const router = express.Router();
 
@@ -20,7 +20,12 @@ router.get(
         res.status(400).send(error);
         throw new Error(error);
       }
-      await createResizedFile(
+      if (!rs.fileExists(req.query.fileName as string)) {
+        const error = 'File Not Found';
+        res.status(400).send(error);
+        throw new Error(error);
+      }
+      await rs.createResizedFile(
         req.query.fileName as string,
         parseInt(req.query.width as string) as number,
         parseInt(req.query.height as string) as number,
