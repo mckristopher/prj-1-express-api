@@ -10,7 +10,7 @@ router.get(
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
-  ) => {
+  ): Promise<void> => {
     try {
       if (!req.query.fileName || !req.query.width || !req.query.height) {
         let error = 'Some input value(s) are missing :';
@@ -54,7 +54,7 @@ router.get(
     }
   },
   // return the appropriate image
-  (req: express.Request, res: express.Response) => {
+  (req: express.Request, res: express.Response): void => {
     res.sendFile(
       `${process.cwd()}/assets/lib/${req.query.fileName}-${req.query.width}-${
         req.query.height

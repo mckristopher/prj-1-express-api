@@ -7,7 +7,7 @@ const app = express(),
 
 app.use('/api', logger, router);
 
-app.listen(port, () => {
+app.listen(port, (): void => {
   console.log(`Server started at port ${port}`);
 });
 
