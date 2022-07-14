@@ -33,9 +33,9 @@ router.get(
   // return the appropriate image
   (req: express.Request, res: express.Response) => {
     res.sendFile(
-      `${process.cwd()}/src/assets/lib/${req.query.fileName}-${
-        req.query.width
-      }-${req.query.height}.jpeg`
+      `${process.cwd()}/assets/lib/${req.query.fileName}-${req.query.width}-${
+        req.query.height
+      }.jpeg`
     );
   }
 );

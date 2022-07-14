@@ -35,14 +35,6 @@ describe('/api/image endpoint', () => {
     expect(fs.existsSync(getFilePath('fjord', 500, 500)));
   });
 
-  it('should return existing image if resolution exists', async () => {
-    const response = await request.get(
-      '/api/images?fileName=encenadaport&width=100&height=100'
-    );
-    expect(response.status).toBe(200);
-    expect(fs.existsSync(getFilePath('encenadaport', 100, 100)));
-  });
-
   it('should throw an error if file name is missing in query', async () => {
     const response = await request.get('/api/images?width=100&height=100');
     expect(response.status).toBe(400);

@@ -6,7 +6,7 @@ function logger(
   next: express.NextFunction
 ) {
   console.log(
-    `${req.url} was visited with params : ${JSON.stringify(req.query)}`
+    `${req.url} was visited with params : \n${JSON.stringify(req.query)}`
   );
   next();
 }

@@ -11,20 +11,20 @@ async function createResizedFile(
   next: NextFunction
 ) {
   if (
-    !existsSync(`${APP_DIR}/src/assets/lib/${fileName}-${width}-${height}.jpeg`)
+    !existsSync(`${APP_DIR}/assets/lib/${fileName}-${width}-${height}.jpeg`)
   ) {
-    await sharp(`${APP_DIR}/src/assets/${fileName}.jpeg`)
+    await sharp(`${APP_DIR}/assets/${fileName}.jpeg`)
       .resize(width, height)
       .toFile(
-        `${APP_DIR}/src/assets/lib/${fileName}-${width}-${height}.jpeg`,
+        `${APP_DIR}/assets/lib/${fileName}-${width}-${height}.jpeg`,
         next
       );
     console.log(
-      `image created : ${APP_DIR}/src/assets/lib/${fileName}-${width}-${height}.jpeg`
+      `image created : \n${APP_DIR}/assets/lib/${fileName}-${width}-${height}.jpeg`
     );
   } else {
     console.log(
-      `using existing image : ${APP_DIR}/src/assets/lib/${fileName}-${width}-${height}.jpeg`
+      `using existing image : \n${APP_DIR}/assets/lib/${fileName}-${width}-${height}.jpeg`
     );
     next();
   }
